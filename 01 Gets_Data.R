@@ -28,20 +28,45 @@ library(PerformanceAnalytics);library(zoo);library(tseries);
 #using the tseries function get.hist.quote(). Set the sample to Jan 1998 through Dec 2009.
 
 # Get the adjusted closing prices from Yahoo!
-VBLTX_prices <- get.hist.quote(instrument="vbltx", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
-VBLTX_prices <- get.hist.quote(instrument="vbltx", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
 
+
+COMF.L
+SMICHA.SW
+
+CSBGC3.SW
+CHCORP.SW
+IGIL.SW
+jnk
+bsv
+emb
+CSBGC0.SW
+biv
+
+#ETF
+VTI_prices <- get.hist.quote(instrument="VTI", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+VWO_prices <- get.hist.quote(instrument="VWO", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+VPL_prices <- get.hist.quote(instrument="vpl", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+vnqi_prices <- get.hist.quote(instrument="vnqi", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+vnq_prices <- get.hist.quote(instrument="vnq", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+FTAL_prices <- get.hist.quote(instrument="FTAL.L", start="2010-01-01",end="2015-08-31", quote="AdjClose",provider="yahoo", origin="2010-01-01",compression="m", retclass="zoo", quiet=TRUE)
+
+#Stocks
+VBLTX_prices <- get.hist.quote(instrument="vbltx", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
 FMAGX_prices <- get.hist.quote(instrument="fmagx", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
-
 SBUX_prices <- get.hist.quote(instrument="sbux", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
-
-UBS_prices <- get.hist.quote(instrument="goog", start="1998-01-01",end="2009-12-31", quote="AdjClose",provider="yahoo", origin="1970-01-01",compression="m", retclass="zoo", quiet=TRUE)
-
 
 ?get.hist.quote
 
+
 # Change the class of the time index to yearmon which is appropriate for monthly data
 # index() and as.yearmon() are functions in the zoo package  
+
+index(VTI_prices) <- as.yearmon(index(VTI_prices))
+index(VWO_prices) <- as.yearmon(index(VWO_prices))
+index(VPL_prices) <- as.yearmon(index(VPL_prices))
+index(vnqi_prices) <- as.yearmon(index(vnqi_prices))
+index(vnq_prices) <- as.yearmon(index(vnq_prices))
+index(FTAL_prices) <- as.yearmon(index(FTAL_prices))
 
 index(VBLTX_prices) <- as.yearmon(index(VBLTX_prices))
 index(FMAGX_prices) <- as.yearmon(index(FMAGX_prices))
@@ -51,21 +76,18 @@ start(SBUX_prices)
 end(SBUX_prices)
 
 plot(FMAGX_prices)
-
 plot(VBLTX_prices)
-
 plot(SBUX_prices)
 
 
+plot(VTI_prices) 
+plot(VWO_prices)
+plot(VPL_prices)
+plot(vnqi_prices)
+plot(vnq_prices)
+plot(FTAL_prices)
+
 all_prices <- merge(VBLTX_prices, FMAGX_prices, SBUX_prices)
-
-
-
-log(all_prices[2:n,1]) - log(all_prices[1:(n-1),1])
-
-
-
-all_prices[2:n]
 
 #################
 # Compounded Interest
